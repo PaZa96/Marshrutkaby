@@ -1,0 +1,162 @@
+﻿body {
+    min-height: initial;
+    padding-top: 70px;
+    background-image: url('../Images/khakaton3.png');
+}
+
+.form-control{
+    border-color:#18ba60;
+    border-width:3px;
+}
+
+.table-bordered-custom {
+    border: 5px solid #18ba60;
+}
+
+@media (min-width:768px) {
+    .navbar-default {
+        background-color: transparent;
+        padding: 10px 0;
+        -webkit-transition: padding .3s;
+        -moz-transition: padding .3s;
+        transition: padding .3s;
+        border: 0;
+    }
+
+    .text-about-right {
+        font-size: 26.5px;
+    }
+        .navbar-default .navbar-brand {
+            font-size: 2em;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            transition: all .3s;
+        }
+
+        .navbar-default .navbar-nav > .active > a {
+            border-radius: 3px;
+        }
+
+        .navbar-default.navbar-shrink {
+            background-color: #222;
+            padding: 10px 0;
+        }
+
+            .navbar-default.navbar-shrink .navbar-brand {
+                font-size: 1.5em;
+            }
+}
+.navbar-default {
+    background-color: #222;
+    border-color: transparent;
+}
+
+.navbar-default .navbar-brand {
+    color: #18ba60;
+    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+
+}
+
+.container-index{
+    background-color:#eee;
+    padding-bottom:60px;
+}
+
+.navbar-default .nav li a {
+    color: #fff;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+        .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:active, .navbar-default .navbar-brand.active {
+            color: #18ba60;
+        }
+
+         .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+            color: #fff;
+            background-color: #18ba60;
+        }
+           .navbar-default .nav li a:hover, .navbar-default .nav li a:focus {
+            color: #18ba60;
+            outline: 0;
+        }
+
+               .navbar-default .navbar-toggle {
+        background-color: #18ba60;
+        border-color: #18ba60;
+    }
+                 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+            background-color: #18ba60;
+        }
+.btn-primary {
+    color: #fff;
+    background-color: #18ba60;
+    border-color: #18ba60;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.btn-login, #btnback  {
+  background-color: #18ba60;
+  outline: none;
+  color: #E8E9EC;
+  font-size: 14px;
+  height: auto;
+  border-color:#18ba60;
+  border: 1px;
+  font-weight: normal;
+  padding: 14px;
+  text-transform: uppercase;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.btn-login:hover,
+.btn-login:focus {
+  color: #18ba60;
+  background-color: #E8E9EC;
+  border-color:#18ba60;
+  border: 2px;
+}
+
+.btn-order  {
+  background-color: #18ba60;
+  outline: none;
+  color: #E8E9EC;
+  font-size: 14px;
+  height: auto;
+  border-color:#18ba60;
+  border: 1px;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.btn-order:hover,
+.btn-order:focus {
+  color: #18ba60;
+  background-color: #E8E9EC;
+  border-color:#18ba60;
+  border: 2px;
+}
+ #btnorder  {
+  background-color: #18ba60;
+  outline: none;
+  color: #E8E9EC;
+  font-size: 14px;
+  height: auto;
+  border-color:#18ba60;
+  border: 1px;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-radius: 0px;
+  box-shadow: none;
+}
+#btnorder:hover,
+#btnorder:focus {
+  color: #18ba60;
+  background-color: #E8E9EC;
+  border-color:#18ba60;
+  border: 2px;
+}

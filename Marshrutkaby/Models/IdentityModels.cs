@@ -21,9 +21,20 @@ namespace Marshrutkaby.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MDB", throwIfV1Schema: false)
         {
         }
+
+        public virtual DbSet<CarSet> CarSet { get; set; }
+        public virtual DbSet<DataRoutesSet> DataRoutesSet { get; set; }
+        public virtual DbSet<DriversSet> DriversSet { get; set; }
+        public virtual DbSet<RegistrationSet> RegistrationSet { get; set; }
+        public virtual DbSet<RoutesSet> RoutesSet { get; set; }
+        public virtual DbSet<TimeSet> TimeSet { get; set; }
+        public virtual DbSet<OrderSet> OrderSet { get; set; }
+        public virtual DbSet<TransportCompanySet> TransportCompanySet { get; set; }
+        public virtual DbSet<WayPointsSet> WayPointsSet { get; set; }
+        public virtual DbSet<WayPointsTimeSet> WayPointsTimeSet { get; set; }
 
         public static ApplicationDbContext Create()
         {

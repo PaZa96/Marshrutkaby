@@ -1,0 +1,112 @@
+﻿@model Marshrutkaby.Models.OrderSet
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Редактировать заказ</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.StartingPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.EndPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.TimeSet.DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.TimeSet.ArrivalTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.TransportCompanySet.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataRoutesSet.Price)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (Marshrutkaby.Models.OrderSet item in ViewBag.order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.RoutesSet.StartingPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.RoutesSet.EndPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.TimeSet.DepartureTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.TimeSet.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.TransportCompanySet.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.DataRoutesSet.Price)
+                </td>
+
+            </tr>
+        }
+    </table>
+
+
+
+    @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.IdRegistration)
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationSet.LastName, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.RegistrationSet.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegistrationSet.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationSet.FirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.RegistrationSet.FirstName,new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegistrationSet.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                @Html.LabelFor(model => model.RegistrationSet.MiddleName, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.RegistrationSet.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RegistrationSet.MiddleName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <input type="submit" value="Сохранить" class="btn btn-login" />
+                </div>
+            </div>
+        </div>
+    }
+    
+</body>
+</html>

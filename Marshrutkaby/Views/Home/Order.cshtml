@@ -1,0 +1,153 @@
+﻿@model Marshrutkaby.Models.RegistrationAndRoutes
+@{
+    ViewBag.Title = "Home Page";
+
+}
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<link href="@Url.Content("~/Content/jquery.datetimepicker.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/themes/base/datepicker.css")" rel="stylesheet" />
+<div class="jumbotron">
+    <div class="container-index">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#route" data-toggle="tab">Маршрут</a></li>
+            <li><a href="#company" data-toggle="tab">Выбор перевозчика</a></li>
+            <li><a href="#data" data-toggle="tab">Данные пасажиров</a></li>
+            <li class="disabled"><a href="#confirmation" data-toggle="tab">Подтверждение заказа</a></li>
+        </ul>
+        <!-- Tab panes -->
+
+        <div class="tab-content">
+            <div class="tab-pane fade" id="route">
+            </div>
+
+            <div class="tab-pane fade in active" id="company">
+            </div>
+            <div class="tab-pane fade" id="data">
+                <table class="table table-bordered">
+                   <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.RoutesSet.StartingPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.RoutesSet.EndPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.TimeSet.DepartureTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.TimeSet.ArrivalTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.TransportCompanySet.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.Date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutes.Price)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                        @foreach (Marshrutkaby.Models.DataRoutesSet item in ViewBag.routes)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model =>item.RoutesSet.StartingPoint)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.RoutesSet.EndPoint)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.TimeSet.DepartureTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.TimeSet.ArrivalTime)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.TransportCompanySet.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Price)
+                                </td>
+
+                            </tr>
+                        }
+                </table>
+                
+
+
+                @using (Html.BeginForm("Order", "Home"))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal table-bordered">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <h2>Информация о пассажире</h2>
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Registration.LastName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Registration.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Registration.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.Registration.FirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Registration.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Registration.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Registration.MiddleName, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Registration.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Registration.MiddleName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-10">
+                                        @Html.ActionLink("Назад", "SearchRoutes")
+                                        <input type="submit" value="Продолжить" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="tab-pane fade" id="confirmation">...</div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script type="text/javascript">
+
+$(function() {
+    $('#myTab a[href="#data"]').tab('show')
+
+});
+
+
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
