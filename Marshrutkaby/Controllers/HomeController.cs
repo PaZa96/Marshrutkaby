@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Marshrutkaby.Models;
@@ -22,10 +23,16 @@ namespace Marshrutkaby.Controllers
         {
             if (ModelState.IsValid == false)
             {
-                var drs = db.DataRoutesSet.Where(x => x.Date == datemodels.Date && x.RoutesSet.StartingPoint == datemodels.RoutesSet.StartingPoint && x.RoutesSet.EndPoint == datemodels.RoutesSet.EndPoint);
-                return View("SearchRoutes", drs.ToList());
+                if (datemodels.Date >= DateTime.Now.Date)
+                {
+                    var drs = db.DataRoutesSet.Where(x => x.Date == datemodels.Date && x.RoutesSet.StartingPoint == datemodels.RoutesSet.StartingPoint && x.RoutesSet.EndPoint == datemodels.RoutesSet.EndPoint);
+
+                    return View("SearchRoutes", drs.ToList());
+                }
             }
+
             return View();
+           
         }
 
         public ActionResult SearchRoutes()
@@ -35,10 +42,6 @@ namespace Marshrutkaby.Controllers
 
         public ActionResult SearchRoutes(int id)
         {
-            int idew = id;
-
-           // var drs = db.DataRoutesSet.Where(x => x.Date == datemodels.Date && x.RoutesSet.StartingPoint == datemodels.RoutesSet.StartingPoint && x.RoutesSet.EndPoint == datemodels.RoutesSet.EndPoint);
-            //return View("SearchRoutes", drs.ToList());
             return View();
         }
 
@@ -82,7 +85,8 @@ namespace Marshrutkaby.Controllers
                 {
                     IdDataRoute = idDataRoute,
                     IdRegistration = idreg,
-                    OrderTime = date1
+                    OrderTime = date1,
+                    IdUser = User.Identity.GetUserId()  
                 };
 
                 this.db.OrderSet.Add(order);
@@ -90,71 +94,66 @@ namespace Marshrutkaby.Controllers
 
                 var ord = db.OrderSet.Where(x => x.IdRegistration == rar.Registration.IdRegistration).ToList();
 
+                ViewBag.idorder = ord.Select(x => x.IdOrder).ToString();
+
                 return View("Confirmation", ord);
             }
             else return View();
         }
 
+
+       
         [HttpGet]
-        public ActionResult Edit1(int id)
+        public ActionResult _Delete(int id)
         {
-            Models.OrderSet os = db.OrderSet.Find(id);
-
-            ViewBag.order = db.OrderSet.Where(x => x.RegistrationSet.IdRegistration == id).ToList();
-
-            return View("Edit1", os);
+            Models.OrderSet os = db.OrderSet.FirstOrDefault(x => x.IdOrder == id);
+            return PartialView(os);
         }
 
-        [HttpPost]
-        public ActionResult Edit1(Models.OrderSet rs)
+        public ActionResult Delete(int id)
         {
-            var edit = db.RegistrationSet.FirstOrDefault(x => x.IdRegistration == rs.IdRegistration);
 
-            edit.LastName = rs.RegistrationSet.LastName.ToString();
-            db.RegistrationSet.Attach(edit);
+            Models.OrderSet os = db.OrderSet.Find(id);
+            this.db.OrderSet.Remove(os);
+            this.db.SaveChanges();
 
-            db.SaveChanges();
+            string iduser = User.Identity.GetUserId();
+            var date = DateTime.Now.Date;
+            var time = DateTime.Now.TimeOfDay;
+            var ord = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date >= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime > time*/).ToList();
+            ViewBag.complete = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date <= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime < time*/).ToList();
 
-            var ord = db.OrderSet.Where(x => x.IdRegistration == rs.IdRegistration).ToList();
+
+
             return View("Confirmation", ord);
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            Models.OrderSet os = db.OrderSet.Find(id);
+            Models.OrderSet os = db.OrderSet.FirstOrDefault(x=>x.IdRegistration == id);
 
             ViewBag.order = db.OrderSet.Where(x => x.RegistrationSet.IdRegistration == id).ToList();
 
-            return View("Edit1", os);
+            return View("Edit", os);
         }
+
         [HttpPost]
         public ActionResult Edit( Models.OrderSet os)
         {
-            //if (ModelState.IsValid)
-
-            //db.Entry(os.RegistrationSet).State = EntityState.Modified;
-            //db.SaveChanges();
-
-            //    var ord = db.OrderSet.Where(x => x.IdRegistration == os.IdRegistration).ToList();
-            //    return View("Confirmation", ord);
-            //}
-            //else
-            //{
-            //    return View();
-            //}
             var edit = db.RegistrationSet.FirstOrDefault(x => x.IdRegistration == os.IdRegistration);
 
             edit.LastName = os.RegistrationSet.LastName.ToString();
             edit.FirstName = os.RegistrationSet.FirstName.ToString();
             edit.MiddleName = os.RegistrationSet.MiddleName.ToString();
            
-
             db.SaveChanges();
 
             var ord = db.OrderSet.Where(x => x.IdRegistration == os.IdRegistration).ToList();
             return View("Confirmation", ord);
         }
+
+       
 
         public ActionResult Home()
         {

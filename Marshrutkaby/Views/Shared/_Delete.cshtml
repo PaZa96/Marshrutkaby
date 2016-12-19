@@ -1,0 +1,23 @@
+﻿@model Marshrutkaby.Models.OrderSet
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Отмена заказа</h4>
+    </div>
+    <div class="modal-body">
+        @using (Html.BeginForm("Confirmation", "Home"))
+        {
+            <div>
+                Вы уверенны что хотите отменить заказ №
+                @Html.DisplayFor(model => model.IdOrder)
+            </div>
+
+            @Html.ActionLink("Да", "Delete", new { id = Model.IdOrder }, new { @class = "compItem" })
+            @Html.ActionLink("Нет", "Confirmation", new { @class = "close" })
+        }
+    </div>
+
+</div>
+
+

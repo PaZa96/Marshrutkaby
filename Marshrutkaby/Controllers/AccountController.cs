@@ -12,9 +12,11 @@ using Marshrutkaby.Models;
 
 namespace Marshrutkaby.Controllers
 {
+   
     [Authorize]
     public class AccountController : Controller
     {
+        Models.ApplicationDbContext db = new Models.ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -403,10 +405,45 @@ namespace Marshrutkaby.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+    
+        [HttpGet]
         public ActionResult PrivateOffice()
         {
-            return View();
+            string iduser = User.Identity.GetUserId();
+            var date = DateTime.Now.Date;
+            var time = DateTime.Now.TimeOfDay;
+            var ord =  db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date >= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime > time*/).ToList();
+
+            ViewBag.complete = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date <= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime < time*/).ToList();
+
+            return View(ord);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult _Remove(int id)
+        {
+            Models.OrderSet os = db.OrderSet.FirstOrDefault(x=>x.IdOrder == id);
+            return PartialView(os);
+        }
+
+        [Authorize]
+        public ActionResult Remove(int id)
+        {
+          
+            Models.OrderSet os = db.OrderSet.Find(id);
+            this.db.OrderSet.Remove(os);
+            this.db.SaveChanges();
+
+            string iduser = User.Identity.GetUserId();
+            var date = DateTime.Now.Date;
+            var time = DateTime.Now.TimeOfDay;
+            var ord = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date >= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime > time*/).ToList();
+            ViewBag.complete = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date <= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime < time*/).ToList();
+
+
+
+            return View("PrivateOffice", ord);
         }
 
         protected override void Dispose(bool disposing)

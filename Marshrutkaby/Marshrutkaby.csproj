@@ -382,7 +382,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -423,7 +425,8 @@
     <Content Include="Views\Home\Confirmation.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
-    <Content Include="Views\Home\Edit1.cshtml" />
+    <Content Include="Views\Shared\_Remove.cshtml" />
+    <Content Include="Views\Shared\_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

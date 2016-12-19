@@ -21,5 +21,7 @@ namespace Marshrutkaby.Models
         public int IdRegistration { get; set; }
 
         public virtual RegistrationSet RegistrationSet { get; set; }
+        
+        public string IdUser { get; set; }
     }
 }

@@ -1,8 +1,200 @@
-﻿@{
+﻿@model IEnumerable<Marshrutkaby.Models.OrderSet>
+@{
     ViewBag.Title = "Личный кабинет";
 }
+<link href="@Url.Content("~/Content/themes/base/all.css")" rel="stylesheet" type="text/css" />
+<div class="container-index">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#upcoming" data-toggle="tab">Предстоящие поездки</a></li>
+        <li><a href="#complete" data-toggle="tab">Совершённые поездки</a></li>
 
-<h2>@ViewBag.Title.</h2>
-<div>
+    </ul>
+    <!-- Tab panes -->
+@using (Html.BeginForm("PrivateOffice", "Account"))
+{
+    <div class="tab-content">
+        <div class="tab-pane fade in active table-bordered" id="upcoming">
+           
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.StartingPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.EndPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutesSet.Date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutesSet.TimeSet.DepartureTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutesSet.TimeSet.ArrivalTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataRoutesSet.TransportCompanySet.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RegistrationSet.LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RegistrationSet.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.RegistrationSet.MiddleName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderTime)
+                        </th>
 
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.StartingPoint)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.EndPoint)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRoutesSet.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRoutesSet.TimeSet.DepartureTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRoutesSet.TimeSet.ArrivalTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataRoutesSet.TransportCompanySet.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RegistrationSet.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RegistrationSet.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.RegistrationSet.MiddleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderTime)
+                            </td>
+                            <td>
+                                                      
+                                @Html.ActionLink("Отменить", "_Remove", new { id = item.IdOrder }, new { @class = "compItem", data_dialog_title = "Отмена" })
+                              
+                            </td>
+                            
+                        </tr>
+                    }
+
+                </table>
+
+            
+        </div>
+        <div id="modDialog" class="modal fade">
+            <div id="dialogContent" class="modal-dialog"></div>
+        </div>
+        <div class="tab-pane fade" id="complete">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.StartingPoint)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.EndPoint)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataRoutesSet.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataRoutesSet.TimeSet.DepartureTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataRoutesSet.TimeSet.ArrivalTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataRoutesSet.TransportCompanySet.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationSet.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationSet.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RegistrationSet.MiddleName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderTime)
+                    </th>
+
+                    <th></th>
+                </tr>
+
+                @foreach (Marshrutkaby.Models.OrderSet item in ViewBag.complete)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.StartingPoint)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.EndPoint)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRoutesSet.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRoutesSet.TimeSet.DepartureTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRoutesSet.TimeSet.ArrivalTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DataRoutesSet.TransportCompanySet.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationSet.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationSet.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RegistrationSet.MiddleName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderTime)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+
+    </div>
+}
 </div>
+
+@section Scripts {
+<script type="text/javascript">
+     $(function () {
+            $.ajaxSetup({ cache: false });
+           $(".compItem").click(function (e) {
+
+                e.preventDefault();
+                $.get(this.href, function (data) {
+                    $('#dialogContent').html(data);
+                    $('#modDialog').modal('show');
+                });
+            });
+        })
+</script>
+    }
+
