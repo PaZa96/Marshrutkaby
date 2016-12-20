@@ -25,7 +25,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Marshrutka.by", "Home", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (User.IsInRole("User"))
+                {
+                @Html.ActionLink("Marshrutka.by", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Marshrutka.by", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 @if (User.IsInRole("User"))
@@ -40,7 +47,6 @@
                 {
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Главная", "Index", "Admin")</li>
-                        <li>@Html.ActionLink("Личный кабинет", "PrivateOffice", "Admin")</li>
                         <li>@Html.ActionLink("Компании", "Company", "Admin")</li>
                     </ul>
                 }

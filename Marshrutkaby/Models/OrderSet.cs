@@ -10,8 +10,10 @@ namespace Marshrutkaby.Models
     public partial class OrderSet
     {
         [Key]
+        [Display(Name = "Номер заказа")]
         public int IdOrder { get; set; }
 
+        [Display(Name = "Дата заказа")]
         public DateTime OrderTime { get; set; }
 
         public int IdDataRoute { get; set; }

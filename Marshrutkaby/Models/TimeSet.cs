@@ -17,6 +17,7 @@ namespace Marshrutkaby.Models
 
         [Key]
         public int IdTime { get; set; }
+
         [Display(Name = "Время отправления")]
         public TimeSpan DepartureTime { get; set; }
 

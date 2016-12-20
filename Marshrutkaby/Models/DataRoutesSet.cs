@@ -24,7 +24,7 @@ namespace Marshrutkaby.Models
         [Display(Name = "Дата отправления")]
         public DateTime Date { get; set; }
 
-        
+        [Display(Name = "Информация")]
         public string Information { get; set; }
 
         public int IdTransportCompany { get; set; }

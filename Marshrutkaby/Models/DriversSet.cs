@@ -12,23 +12,29 @@ namespace Marshrutkaby.Models
         [Key]
         public int IdDriver { get; set; }
 
+        [Display(Name = "Фамилия")]
         [Required]
         public string LastName { get; set; }
 
+        [Display(Name = "Имя")]
         [Required]
         public string FirstName { get; set; }
 
+        [Display(Name = "День рождения")]
         public DateTime Birthday { get; set; }
 
+        [Display(Name = "Лицензия")]
         [Required]
         public string License { get; set; }
 
+        [Display(Name = "Номер телефона")]
         [Required]
         public string NumberPhone { get; set; }
 
         [Required]
         public string Email { get; set; }
 
+        [Display(Name = "Рейтинг")]
         public int Raiting { get; set; }
 
         public int IdTransportCompany { get; set; }

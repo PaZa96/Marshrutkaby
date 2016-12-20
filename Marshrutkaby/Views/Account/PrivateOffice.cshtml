@@ -14,10 +14,13 @@
 @using (Html.BeginForm("PrivateOffice", "Account"))
 {
     <div class="tab-content">
-        <div class="tab-pane fade in active table-bordered" id="upcoming">
+        <div class="tab-pane fade in active" id="upcoming">
            
-                <table class="table">
+                <table class="table table-bordered">
                     <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IdOrder)
+                        </th>
                         <th>
                             @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.StartingPoint)
                         </th>
@@ -56,6 +59,9 @@
                     {
                         <tr>
                             <td>
+                                @Html.DisplayFor(modelItem => item.IdOrder)
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.StartingPoint)
                             </td>
                             <td>
@@ -87,7 +93,7 @@
                             </td>
                             <td>
                                                       
-                                @Html.ActionLink("Отменить", "_Remove", new { id = item.IdOrder }, new { @class = "compItem", data_dialog_title = "Отмена" })
+                                @Html.ActionLink("Отменить", "_Remove", new { id = item.IdOrder }, new { @class = "compItem btn btn-primary", data_dialog_title = "Отмена" })
                               
                             </td>
                             
@@ -101,9 +107,12 @@
         <div id="modDialog" class="modal fade">
             <div id="dialogContent" class="modal-dialog"></div>
         </div>
-        <div class="tab-pane fade" id="complete">
-            <table class="table">
+        <div class="tab-pane fade " id="complete">
+            <table class="table table-bordered">
                 <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdOrder)
+                    </th>
                     <th>
                         @Html.DisplayNameFor(model => model.DataRoutesSet.RoutesSet.StartingPoint)
                     </th>
@@ -141,6 +150,9 @@
                 @foreach (Marshrutkaby.Models.OrderSet item in ViewBag.complete)
                 {
                     <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdOrder)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.StartingPoint)
                         </td>

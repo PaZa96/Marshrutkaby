@@ -19,12 +19,15 @@ namespace Marshrutkaby.Models
         [Key]
         public int IdRegistration { get; set; }
 
+        [Display(Name = "Имя")]
         [Required(ErrorMessage = "Введите Имя")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Фамилия")]
         [Required(ErrorMessage = "Введите фамилию")]
         public string LastName { get; set; }
 
+        [Display(Name = "Отчество")]
         [Required(ErrorMessage = "Введите имя")]
         public string MiddleName { get; set; }
 

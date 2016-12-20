@@ -34,6 +34,7 @@ namespace Marshrutkaby.Controllers
         {
             if (ModelState.IsValid == false)
             {
+
                 if (datemodels.Date >= DateTime.Now.Date)
                 {
                     var drs = db.DataRoutesSet.Where(x => x.Date == datemodels.Date && x.RoutesSet.StartingPoint == datemodels.RoutesSet.StartingPoint && x.RoutesSet.EndPoint == datemodels.RoutesSet.EndPoint);
@@ -51,21 +52,24 @@ namespace Marshrutkaby.Controllers
             return View();
         }
 
-        public ActionResult SearchRoutes(int id)
+        public ActionResult Search()
         {
-            return View();
+            Models.DataRoutesSet drs = db.DataRoutesSet.Find(idDataRoute);
+            var dr = db.DataRoutesSet.Where(x => x.Date == drs.Date && x.RoutesSet.StartingPoint == drs.RoutesSet.StartingPoint && x.RoutesSet.EndPoint == drs.RoutesSet.EndPoint);
+
+            return View("SearchRoutes", dr.ToList());
         }
 
-        public ActionResult Confirmation()
+        public ActionResult Confirmation(int id)
         {
-            var ors = db.OrderSet.Where(x => x.IdRegistration == idOrder).ToList();
+            var ors = db.OrderSet.Where(x => x.IdRegistration == id).ToList();
+            ViewBag.idreg = id;
             return View(ors);
         }
 
         [HttpPost]
         public ActionResult Confirmation(int idreg, int idroute)
         {
-           
             return View("Index");
         }
 
@@ -74,6 +78,7 @@ namespace Marshrutkaby.Controllers
         {
             var route = db.DataRoutesSet.Where(x => x.IdDataRoute == id).ToList();
             ViewBag.routes = route;
+            ViewBag.idr = id;
             idDataRoute = id;
             return View();
         }
@@ -107,7 +112,7 @@ namespace Marshrutkaby.Controllers
                 var ord = db.OrderSet.Where(x => x.IdRegistration == rar.Registration.IdRegistration).ToList();
                 int id = rar.Registration.IdRegistration;
                 idOrder = id;
-                return RedirectToAction("Confirmation");
+                return RedirectToAction("Confirmation", new { id = id });
             }
             else return View();
         }
@@ -115,26 +120,18 @@ namespace Marshrutkaby.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            Models.OrderSet os = db.OrderSet.FirstOrDefault(x => x.IdOrder == id);
-            return View(os);
+            Models.OrderSet ors = db.OrderSet.FirstOrDefault(x => x.IdRegistration == id);
+            ViewBag.idregdel = id;
+            return PartialView(ors);
         }
-
-        public ActionResult Delete(Models.OrderSet os)
+        
+        public ActionResult Del(int id)
         {
-
-            Models.OrderSet oss = db.OrderSet.Find();
-            this.db.OrderSet.Remove(os);
+            Models.OrderSet ors = db.OrderSet.FirstOrDefault(x => x.IdRegistration == id);
+            this.db.OrderSet.Remove(ors);
             this.db.SaveChanges();
 
-            string iduser = User.Identity.GetUserId();
-            var date = DateTime.Now.Date;
-            var time = DateTime.Now.TimeOfDay;
-            var ord = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date >= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime > time*/).ToList();
-            ViewBag.complete = db.OrderSet.Where(x => x.IdUser == iduser & x.DataRoutesSet.Date <= date /*&& x.DataRoutesSet.TimeSet.ArrivalTime < time*/).ToList();
-
-
-
-            return View("Confirmation", ord);
+            return View("Index");
         }
 
         [HttpGet]

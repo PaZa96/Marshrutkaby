@@ -24,12 +24,14 @@ namespace Marshrutkaby.Models
         [Display(Name = "Перевозчик")]
         public string Name { get; set; }
 
+        [Display(Name = "Номер телефона")]
         [Required]
         public string NumberPhone { get; set; }
 
         [Required]
         public string Email { get; set; }
 
+        [Display(Name = "Рейтинг")]
         [Required]
         public string Raiting { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,6 +14,12 @@ namespace Marshrutkaby.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            ViewBag.countTC = db.TransportCompanySet.Count();
+            ViewBag.countRoute = db.RoutesSet.Count();
+            ViewBag.countOrder = db.OrderSet.Count();
+            ViewBag.countCar = db.CarSet.Count();
+            ViewBag.countUser = db.Users.Count();
+
             return View();
         }
 
@@ -30,14 +37,16 @@ namespace Marshrutkaby.Controllers
         }
 
         [HttpPost]
-        ActionResult Edit(Models.TransportCompanySet tcs)
+        public ActionResult Edit(Models.TransportCompanySet tcs)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tcs).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Company");
-            }
+            var edit = db.TransportCompanySet.FirstOrDefault(x => x.IdTransportCompany == tcs.IdTransportCompany);
+
+            edit.Name = tcs.Name.ToString();
+            edit.NumberPhone = tcs.NumberPhone.ToString();
+            edit.Email = tcs.NumberPhone.ToString();
+
+            db.SaveChanges();
+
             return RedirectToAction("Company");
         }
 
