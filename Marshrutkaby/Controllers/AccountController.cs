@@ -393,7 +393,7 @@ namespace Marshrutkaby.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
             return RedirectToAction("Home", "Home");
         }
 
@@ -492,6 +492,7 @@ namespace Marshrutkaby.Controllers
             {
                 return Redirect(returnUrl);
             }
+           
             return RedirectToAction("Index", "Home");
         }
 

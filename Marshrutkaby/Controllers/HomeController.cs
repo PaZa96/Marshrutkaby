@@ -12,9 +12,20 @@ namespace Marshrutkaby.Controllers
     public class HomeController : Controller
     {
         public static int idDataRoute;
+        public static int idOrder;
         Models.ApplicationDbContext db = new Models.ApplicationDbContext();
+        [Authorize]
         public ActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            else if (User.IsInRole("TC"))
+            {
+                return View();
+            }
             return View("Index");
         }
 
@@ -47,7 +58,8 @@ namespace Marshrutkaby.Controllers
 
         public ActionResult Confirmation()
         {
-            return View();
+            var ors = db.OrderSet.Where(x => x.IdRegistration == idOrder).ToList();
+            return View(ors);
         }
 
         [HttpPost]
@@ -93,27 +105,24 @@ namespace Marshrutkaby.Controllers
                 this.db.SaveChanges();
 
                 var ord = db.OrderSet.Where(x => x.IdRegistration == rar.Registration.IdRegistration).ToList();
-
-                ViewBag.idorder = ord.Select(x => x.IdOrder).ToString();
-
-                return View("Confirmation", ord);
+                int id = rar.Registration.IdRegistration;
+                idOrder = id;
+                return RedirectToAction("Confirmation");
             }
             else return View();
         }
-
-
        
         [HttpGet]
-        public ActionResult _Delete(int id)
-        {
-            Models.OrderSet os = db.OrderSet.FirstOrDefault(x => x.IdOrder == id);
-            return PartialView(os);
-        }
-
         public ActionResult Delete(int id)
         {
+            Models.OrderSet os = db.OrderSet.FirstOrDefault(x => x.IdOrder == id);
+            return View(os);
+        }
 
-            Models.OrderSet os = db.OrderSet.Find(id);
+        public ActionResult Delete(Models.OrderSet os)
+        {
+
+            Models.OrderSet oss = db.OrderSet.Find();
             this.db.OrderSet.Remove(os);
             this.db.SaveChanges();
 

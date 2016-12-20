@@ -75,7 +75,7 @@
                                         @Html.DisplayFor(modelItem => item.Price)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Заказать", "Order", new { id = item.IdDataRoute, @class = "btn btn-order" })
+                                        @Html.ActionLink("Заказать", "Order",new { id = item.IdDataRoute }, new { @class = "btn btn-order" })
 
                                     </td>
                                    
@@ -85,7 +85,7 @@
 
                     </table>
                     
-                        @Html.ActionLink("Назад", "Index", new { id = "btnback" }, new {@class="btn btn-login"})
+                        @Html.ActionLink("Назад", "Index", new { id = "btnback" }, new { @class="btn btn-login"})
                    
                     
                 </div>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Marshrutkaby.Models.TransportCompanySet>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Перевозчик</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Raiting)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Raiting)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="container-index">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active"><a href="#car" data-toggle="tab">Автопарк</a></li>
+        <li><a href="#driver" data-toggle="tab">Водители</a></li>
+        <li><a href="#routes" data-toggle="tab">Маршруты</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active table-bordered" id="car">
+            @Html.Action("Car", "Admin", new { id = ViewBag.IdTC })
+        </div>
+        <div class="tab-pane fade" id="driver">
+            @Html.Action("Driver", "Admin", new { id = ViewBag.IdTC })
+
+        </div>
+        <div class="tab-pane fade" id="routes">
+            @Html.Action("Routes", "Admin", new { id = ViewBag.IdTC })
+        </div>
+    </div>
+    <div>
+        @Html.ActionLink("Назад", "Company", new { }, new { @class = "btn btn-login" })
+    </div>
+</div>

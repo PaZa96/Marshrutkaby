@@ -5,7 +5,8 @@
 }
 
 <h2>Confirmation</h2>
-
+@using (Html.BeginForm("Confirmation", "Home"))
+{
 <table class="table table-bordered">
     <tr>
         <th>
@@ -42,7 +43,8 @@
         <th></th>
     </tr>
     
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.DataRoutesSet.RoutesSet.StartingPoint)
@@ -81,25 +83,10 @@
 }
 
 </table>
-@using (Html.BeginForm("Order", "Home"))
-{
-@Html.ActionLink("Отменить", "_Delete", new { id = @ViewBag.idorder }, new { @class = "compItem", data_dialog_title = "Отмена" })
-}
+
+
+
+@Html.ActionLink("Отменить", "Delete", new { id = ViewBag.idorder }, new { @class = "compItem" })
 @Html.ActionLink("Подтвердить", "Index", new { id = "btnback" }, new { @class = "btn btn-login" })
-    
-
-@section Scripts {
-    <script type="text/javascript">
-     $(function () {
-            $.ajaxSetup({ cache: false });
-           $(".compItem").click(function (e) {
-
-                e.preventDefault();
-                $.get(this.href, function (data) {
-                    $('#dialogContent').html(data);
-                    $('#modDialog').modal('show');
-                });
-            });
-        })
-    </script>
 }
+

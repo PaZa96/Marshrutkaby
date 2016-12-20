@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Marshrutkaby.Models.CarSet>
+
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberPlate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Services)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfSeats)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberPlate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Services)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfSeats)
+        </td>
+    </tr>
+}
+
+</table>

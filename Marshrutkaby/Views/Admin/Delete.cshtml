@@ -1,0 +1,56 @@
+﻿@model Marshrutkaby.Models.TransportCompanySet
+
+<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Вы уверенны что хотите удалить компанию и все сведения о ней?</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NumberPhone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NumberPhone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Raiting)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Raiting)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    @Html.ActionLink("Назад", "Company", new { }, new { @class = "btn btn-login" })
+                    @Html.ActionLink("Удалить", "DeleteTC", new { id = ViewBag.IdTc }, new { @class = "btn btn-login" })
+                </div>
+            }
+        </div>
+    </div>
+   </div>

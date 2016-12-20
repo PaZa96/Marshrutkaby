@@ -9,6 +9,7 @@
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/bootstrap-datetimepicker.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/navbar-fixed-top.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/all.css")" rel="stylesheet"  type="text/css"/>
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 
     <link href="@Url.Content("~/Content/jquery.datetimepicker.css")" rel="stylesheet" />
@@ -27,11 +28,22 @@
                 @Html.ActionLink("Marshrutka.by", "Home", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                @if (User.IsInRole("User"))
+                {
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Заказ билетов", "Index", "Home")</li>
                     <li>@Html.ActionLink("Личный кабинет", "PrivateOffice", "Account")</li>
                     <li>@Html.ActionLink("Информация", "Contact", "Home")</li>
                 </ul>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Главная", "Index", "Admin")</li>
+                        <li>@Html.ActionLink("Личный кабинет", "PrivateOffice", "Admin")</li>
+                        <li>@Html.ActionLink("Компании", "Company", "Admin")</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Marshrutkaby.Models.DataRoutesSet>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutesSet.StartingPoint)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoutesSet.EndPoint)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeSet.ArrivalTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeSet.DataRoutesSet)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoutesSet.StartingPoint)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoutesSet.EndPoint)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeSet.ArrivalTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimeSet.DepartureTime)
+        </td>
+    </tr>
+}
+
+</table>
