@@ -336,6 +336,9 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <None Include=".bin\bower.cmd" />
+    <None Include=".bin\git.cmd" />
+    <None Include=".bin\node.cmd" />
     <None Include="Properties\PublishProfiles\marshrutkaby - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Images\about\1.jpg" />
@@ -440,6 +443,9 @@
     <Content Include="Views\Admin\Routes.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Company\Routes.cshtml" />
+    <Content Include="Views\Company\Drivers.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -449,7 +455,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Company\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

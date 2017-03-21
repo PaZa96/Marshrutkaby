@@ -33,6 +33,10 @@
                 {
                     @Html.ActionLink("Marshrutka.by", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
                 }
+                @if (User.IsInRole("Company"))
+                {
+                    @Html.ActionLink("Marshrutka.by", "Index", "Company", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 @if (User.IsInRole("User"))
@@ -48,6 +52,14 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Главная", "Index", "Admin")</li>
                         <li>@Html.ActionLink("Компании", "Company", "Admin")</li>
+                    </ul>
+                }
+                @if (User.IsInRole("Company"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Главная", "Index", "Company")</li>
+                        <li>@Html.ActionLink("Маршруты", "Routes", "Company")</li>
+                        <li>@Html.ActionLink("Водители", "Drivers", "Company")</li>
                     </ul>
                 }
                 @Html.Partial("_LoginPartial")

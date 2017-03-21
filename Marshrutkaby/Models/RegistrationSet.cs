@@ -31,6 +31,10 @@ namespace Marshrutkaby.Models
         [Required(ErrorMessage = "Введите имя")]
         public string MiddleName { get; set; }
 
+        [Display(Name = "Номер телефона")]
+        [Required(ErrorMessage = "Введите номер телефона")]
+        public string PhoneNumber { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderSet> OrderSet { get; set; }
 

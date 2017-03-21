@@ -22,9 +22,13 @@ namespace Marshrutkaby.Controllers
                 return RedirectToAction("Index", "Admin");
             }
 
-            else if (User.IsInRole("TC"))
+            else if (User.IsInRole("Company"))
             {
-                return View();
+                return RedirectToAction("Index", "Company");
+            }
+            else if (User.IsInRole("Driver"))
+            {
+                return RedirectToAction("Index", "Driver");
             }
             return View("Index");
         }
