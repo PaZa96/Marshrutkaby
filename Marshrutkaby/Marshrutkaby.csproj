@@ -178,6 +178,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminTransportCompany.cs" />
     <Compile Include="Models\CarSet.cs" />
     <Compile Include="Models\DataRoutesSet.cs" />
     <Compile Include="Models\Details.cs" />

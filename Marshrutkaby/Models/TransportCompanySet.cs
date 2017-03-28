@@ -47,5 +47,6 @@ namespace Marshrutkaby.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DriversSet> DriversSet { get; set; }
+
     }
 }

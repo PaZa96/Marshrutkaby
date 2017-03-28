@@ -35,6 +35,7 @@ namespace Marshrutkaby.Models
         public virtual DbSet<TransportCompanySet> TransportCompanySet { get; set; }
         public virtual DbSet<WayPointsSet> WayPointsSet { get; set; }
         public virtual DbSet<WayPointsTimeSet> WayPointsTimeSet { get; set; }
+        public virtual DbSet<AdminTransportCompany> AdminTransportCompany { get; set; }
 
         public static ApplicationDbContext Create()
         {
