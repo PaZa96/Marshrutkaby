@@ -5,11 +5,13 @@ using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace Marshrutkaby.Controllers
 {
     public class AdminController : Controller
     {
         Models.ApplicationDbContext db = new Models.ApplicationDbContext();
+        public static int IDCompany;
         // GET: Admin
         [Authorize]
         public ActionResult Index()
@@ -68,7 +70,21 @@ namespace Marshrutkaby.Controllers
         {
             this.db.TransportCompanySet.Add(tcs);
             this.db.SaveChanges();
+            //     IDCompany = tcs.IdTransportCompany;
+            return RedirectToAction("CreateAdminCompany", "Admin");
+        }
 
+        [HttpGet]
+        public ActionResult CreateAdminCompany()
+        {
+            return View();
+        }
+
+        public ActionResult CreateAdminCompany(Models.RegisterViewModel rwm)
+        {
+            AccountController ac = new AccountController();
+            var x = ac.Register(rwm);
+            
             return RedirectToAction("Company");
         }
 

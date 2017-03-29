@@ -1,0 +1,50 @@
+﻿@model Marshrutkaby.Models.RegisterViewModel
+@{
+    ViewBag.Title = "CreateAdminCompany";
+}
+
+<h2>Добавить администратора компании</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <div class="row" style="padding-bottom: 15px;">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-3" })
+                        <div class="col-md-8">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-8">
+                            @Html.ActionLink("Назад", "Company", new { }, new { @class = "btn btn-login col-md-4" })
+                            <input type="submit" value="Добавить" class="btn btn-login  col-md-4" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

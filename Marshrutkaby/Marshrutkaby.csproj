@@ -180,6 +180,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminTransportCompany.cs" />
     <Compile Include="Models\CarSet.cs" />
+    <Compile Include="Models\CreateCompany.cs" />
     <Compile Include="Models\DataRoutesSet.cs" />
     <Compile Include="Models\Details.cs" />
     <Compile Include="Models\DriversSet.cs" />
@@ -447,6 +448,7 @@
     <Content Include="Views\Company\Routes.cshtml" />
     <Content Include="Views\Company\Drivers.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Admin\CreateAdminCompany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
