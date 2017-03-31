@@ -14,6 +14,6 @@ namespace Marshrutkaby.Models
         [Required]
         public int IdTransportCompany { get; set; }
 
-        public virtual TransportCompanySet TransportCompanySet { get; set; }
+        
     }
 }

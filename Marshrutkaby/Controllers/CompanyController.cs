@@ -17,5 +17,14 @@ namespace Marshrutkaby.Controllers
             var company = db.TransportCompanySet.Find(idTC.IdTransportCompany);
             return View(company);
         }
+
+        public ActionResult Drivers()
+        {
+            var idTC = db.AdminTransportCompany.Find(User.Identity.GetUserId());
+            var company = db.TransportCompanySet.Find(idTC.IdTransportCompany);
+            var drivers = db.DriversSet.Find(company.IdTransportCompany);
+            
+            return View(drivers);
+        }
     }
 }

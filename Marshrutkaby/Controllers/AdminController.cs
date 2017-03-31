@@ -4,7 +4,9 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
-
+using Marshrutkaby.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Marshrutkaby.Controllers
 {
@@ -12,6 +14,8 @@ namespace Marshrutkaby.Controllers
     {
         Models.ApplicationDbContext db = new Models.ApplicationDbContext();
         public static int IDCompany;
+        private ApplicationUserManager _userManager;
+  
         // GET: Admin
         [Authorize]
         public ActionResult Index()
@@ -70,7 +74,7 @@ namespace Marshrutkaby.Controllers
         {
             this.db.TransportCompanySet.Add(tcs);
             this.db.SaveChanges();
-            //     IDCompany = tcs.IdTransportCompany;
+            IDCompany = tcs.IdTransportCompany;
             return RedirectToAction("CreateAdminCompany", "Admin");
         }
 
@@ -80,13 +84,57 @@ namespace Marshrutkaby.Controllers
             return View();
         }
 
-        public ActionResult CreateAdminCompany(Models.RegisterViewModel rwm)
+        #region CreateAdminCompany
+
+        public ApplicationUserManager UserManager
         {
-            AccountController ac = new AccountController();
-            var x = ac.Register(rwm);
-            
-            return RedirectToAction("Company");
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
+
+        public async System.Threading.Tasks.Task<ActionResult> CreateAdminCompany(Models.RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "Company");
+
+                    var adminTC = new AdminTransportCompany
+                    {
+                        UserId = user.Id,
+                        IdTransportCompany = IDCompany
+                    };
+
+                    this.db.AdminTransportCompany.Add(adminTC);
+                    this.db.SaveChanges();
+
+                    return RedirectToAction("Company", "Admin");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
+        #endregion
 
         public ActionResult Car(int id)
         {
@@ -108,6 +156,7 @@ namespace Marshrutkaby.Controllers
 
         public ActionResult Delete(int id)
         {
+
             ViewBag.IdTc = id;
             Models.TransportCompanySet tc = db.TransportCompanySet.FirstOrDefault(x => x.IdTransportCompany == id);
             return PartialView(tc);
@@ -116,9 +165,21 @@ namespace Marshrutkaby.Controllers
         
         public ActionResult DeleteTC(int id)
         {
+
+           
+
             Models.TransportCompanySet tcs = db.TransportCompanySet.FirstOrDefault(x => x.IdTransportCompany == id);
             this.db.TransportCompanySet.Remove(tcs);
             this.db.SaveChanges();
+
+            var adminTC = db.AdminTransportCompany.Where(i => i.IdTransportCompany == id).ToList();
+
+            foreach( var admin in adminTC)
+            {
+                var adm = db.Users.Find(admin.UserId);
+                this.db.Users.Remove(adm);
+                this.db.SaveChanges();
+            }
 
             return RedirectToAction("Company");
         }
